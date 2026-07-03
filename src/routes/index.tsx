@@ -28,7 +28,7 @@ export const Route = createFileRoute("/")({
 });
 
 function HomePage() {
-  const featured = speciesCategories.slice(0, 6);
+  const featured = speciesCategories.slice(0, 4);
   const stats = [
     { k: "20+", v: "Années d'expertise" },
     { k: "80+", v: "Espèces traitées" },
@@ -44,7 +44,7 @@ function HomePage() {
           <img
             src={oceanHero}
             alt=""
-            className="h-full w-full object-cover brightness-75"
+            className="h-full w-full scale-105 object-cover blur-sm brightness-75"
             width={1920}
             height={1080}
           />
@@ -122,6 +122,53 @@ function HomePage() {
         </div>
       </div>
 
+      {/* COMPANY PRESENTATION */}
+      <section className="mx-auto max-w-7xl px-8 pt-32">
+        <div className="grid gap-16 lg:grid-cols-12 lg:gap-24">
+          <div className="lg:col-span-4">
+            <span className="text-xs font-bold uppercase tracking-[0.3em] text-gold">
+              Notre maison
+            </span>
+            <div className="mt-6 h-1 w-16 bg-gold" />
+          </div>
+          <div className="lg:col-span-8">
+            <h2 className="mb-10 font-display text-4xl font-bold leading-tight text-[color:var(--ocean-deep)] md:text-5xl">
+              Une entreprise mauritanienne
+              <br />
+              au service des <span className="italic">grandes tables</span>.
+            </h2>
+            <div className="space-y-6 text-lg font-light leading-relaxed text-muted-foreground">
+              <p>
+                Fondée à Nouakchott, <strong className="font-semibold text-[color:var(--ocean-deep)]">Nationale Pêche SARL</strong> conjugue
+                depuis plus de vingt ans savoir-faire artisanal et exigence
+                industrielle pour offrir le meilleur de l'Atlantique
+                mauritanien.
+              </p>
+              <p>
+                Nos équipes accompagnent chaque produit — du bateau au
+                conteneur — selon un cahier des charges strict :
+                sélection à la criée, traitement en chambre froide sous
+                quelques heures, congélation IQF et traçabilité complète.
+              </p>
+              <p>
+                Grossistes, mareyeurs, importateurs et enseignes de la
+                restauration trouvent chez nous un partenaire fiable, une
+                qualité constante et une capacité d'export vers l'Europe,
+                l'Asie et l'Afrique.
+              </p>
+            </div>
+            <div className="mt-10">
+              <Link
+                to="/a-propos"
+                className="border-b-2 border-gold pb-2 text-xs font-bold uppercase tracking-widest text-gold"
+              >
+                Découvrir notre histoire →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* SPECIES CATALOG */}
       <section className="mx-auto max-w-7xl px-8 py-32">
         <div className="mb-20 max-w-xl">
@@ -135,7 +182,7 @@ function HomePage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-x-8 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-4">
           {featured.map((s, i) => (
             <motion.div
               key={s.slug}
@@ -230,12 +277,12 @@ function HomePage() {
               </Link>
             </div>
           </div>
-          <div className="relative min-h-[600px] w-full bg-secondary lg:w-1/2">
+          <div className="relative min-h-[600px] w-full overflow-hidden bg-secondary lg:w-1/2">
             <img
               src={exportImg}
               alt=""
               loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover"
+              className="absolute inset-0 h-full w-full scale-105 object-cover blur-[2px]"
             />
             <div
               className="absolute inset-0 mix-blend-multiply"
