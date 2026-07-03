@@ -169,6 +169,64 @@ function HomePage() {
         </div>
       </section>
 
+      {/* QUALITY & ENGAGEMENTS */}
+      <section className="bg-[color:var(--ocean-deep)] py-32 text-white">
+        <div className="mx-auto max-w-7xl px-8">
+          <div className="mb-20 grid gap-10 lg:grid-cols-12">
+            <div className="lg:col-span-5">
+              <span className="text-xs font-bold uppercase tracking-[0.3em] text-gold">
+                Notre exigence
+              </span>
+              <h2 className="mt-6 font-display text-4xl font-bold leading-tight md:text-5xl">
+                La qualité, <span className="italic text-gold">notre signature</span>.
+              </h2>
+              <div className="mt-6 h-1 w-16 bg-gold" />
+            </div>
+            <p className="text-lg font-light leading-relaxed text-white/80 lg:col-span-7">
+              Chaque produit qui quitte nos ateliers reflète un engagement
+              sans compromis : fraîcheur préservée, procédés certifiés et
+              contrôle rigoureux à chaque étape, du débarquement jusqu'au
+              conteneur d'export.
+            </p>
+          </div>
+
+          <div className="grid gap-px bg-white/10 md:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                n: "01",
+                t: "Sélection à la criée",
+                d: "Nos acheteurs choisissent chaque lot au débarquement selon des critères stricts de fraîcheur et de calibre.",
+              },
+              {
+                n: "02",
+                t: "Traitement HACCP",
+                d: "Ateliers agréés export, procédures HACCP et traçabilité complète sur l'ensemble de la chaîne.",
+              },
+              {
+                n: "03",
+                t: "Congélation IQF",
+                d: "Surgélation individuelle immédiate pour préserver texture, goût et qualités nutritionnelles.",
+              },
+              {
+                n: "04",
+                t: "Contrôle continu",
+                d: "Audits internes, laboratoires partenaires et suivi documentaire pour chaque expédition.",
+              },
+            ].map((item) => (
+              <div key={item.n} className="bg-[color:var(--ocean-deep)] p-10">
+                <div className="mb-6 font-display text-3xl italic text-gold">
+                  {item.n}
+                </div>
+                <h3 className="mb-4 text-xl font-bold">{item.t}</h3>
+                <p className="text-sm font-light leading-relaxed text-white/70">
+                  {item.d}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* SPECIES CATALOG */}
       <section className="mx-auto max-w-7xl px-8 py-32">
         <div className="mb-20 max-w-xl">
