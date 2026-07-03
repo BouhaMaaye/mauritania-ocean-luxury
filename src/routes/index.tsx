@@ -248,10 +248,10 @@ function HomePage() {
         <img
           src={exportImg}
           alt=""
-          className="absolute inset-0 h-full w-full object-cover opacity-30"
+          className="absolute inset-0 h-full w-full object-cover"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/50" />
         <div className="relative mx-auto max-w-4xl px-6 text-center">
           <div className="text-[10px] font-semibold uppercase tracking-[0.28em] text-gold">
             Exportation
