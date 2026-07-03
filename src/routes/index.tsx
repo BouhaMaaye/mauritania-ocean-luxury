@@ -1,13 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { lazy, Suspense } from "react";
 import { motion } from "motion/react";
 import { speciesCategories } from "@/data/species";
 import oceanHero from "@/assets/ocean-hero.jpg";
 import exportImg from "@/assets/export.jpg";
-
-const OceanScene = lazy(() =>
-  import("@/components/OceanScene").then((m) => ({ default: m.OceanScene })),
-);
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -34,245 +29,219 @@ export const Route = createFileRoute("/")({
 
 function HomePage() {
   const featured = speciesCategories.slice(0, 6);
+  const stats = [
+    { k: "20+", v: "Années d'expertise" },
+    { k: "80+", v: "Espèces traitées" },
+    { k: "15", v: "Pays d'export" },
+    { k: "24/7", v: "Chaîne du froid", italic: true },
+  ];
+
   return (
     <>
-      {/* HERO */}
-      <section className="relative isolate min-h-[92vh] overflow-hidden">
-        {/* Background image + gradient */}
-        <img
-          src={oceanHero}
-          alt=""
-          className="absolute inset-0 h-full w-full object-cover"
-          width={1920}
-          height={1280}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/40" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
-
-        {/* 3D canvas overlay */}
-        <div className="absolute inset-0 opacity-50 mix-blend-multiply">
-          <Suspense fallback={null}>
-            <OceanScene />
-          </Suspense>
+      {/* HERO — full-bleed image with navy overlay from left */}
+      <section className="relative flex min-h-[90vh] items-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img
+            src={oceanHero}
+            alt=""
+            className="h-full w-full object-cover brightness-75"
+            width={1920}
+            height={1080}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to right, var(--ocean-deep) 0%, color-mix(in oklab, var(--ocean-deep) 80%, transparent) 45%, transparent 100%)",
+            }}
+          />
         </div>
 
-        <div className="relative mx-auto flex min-h-[92vh] max-w-7xl flex-col justify-center px-6 py-24">
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-8">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: "easeOut" }}
             className="max-w-3xl"
           >
-            <div className="inline-flex items-center gap-3 rounded-full border border-gold/40 bg-background/40 px-4 py-1.5 backdrop-blur">
-              <span className="h-1.5 w-1.5 rounded-full bg-gold animate-pulse" />
-              <span className="text-[10px] font-semibold uppercase tracking-[0.28em] text-gold">
-                Nouakchott · Mauritanie
+            <div className="mb-8 flex items-center gap-4">
+              <div className="h-px w-12 bg-gold" />
+              <span className="text-sm font-semibold uppercase tracking-[0.3em] text-gold">
+                Excellence halieutique
               </span>
             </div>
-            <h1 className="mt-8 font-display text-5xl leading-[1.05] text-foreground md:text-7xl lg:text-[5.5rem]">
-              L'excellence de la <span className="text-gradient-gold">pêche mauritanienne</span>
+            <h1 className="mb-8 font-display text-6xl font-bold leading-[1.1] text-white md:text-8xl">
+              Nationale Pêche
+              <br />
+              <span className="font-normal italic text-gold">SARL</span>
             </h1>
-            <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              Nationale Peche SARL sélectionne, conditionne et exporte les
-              meilleurs produits de la mer de l'Atlantique vers les marchés
-              européens, asiatiques et africains.
+            <p className="mb-12 max-w-xl text-xl font-light leading-relaxed text-white/90 md:text-2xl">
+              Depuis plus de deux décennies, nous portons les richesses de
+              l'Atlantique mauritanien vers les tables les plus prestigieuses
+              du monde.
             </p>
-            <div className="mt-10 flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-6">
               <Link
                 to="/especes"
-                className="rounded-full bg-gradient-gold px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-gold-foreground shadow-gold-glow transition-transform hover:scale-[1.03]"
+                className="bg-gold px-10 py-5 text-xs font-bold uppercase tracking-widest text-white transition-all hover:-translate-y-1 hover:brightness-95"
               >
-                Découvrir nos espèces
+                Catalogue des espèces
               </Link>
               <Link
                 to="/contact"
-                className="rounded-full border border-border bg-background/50 px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-foreground backdrop-blur transition-colors hover:border-gold/60 hover:text-gold"
+                className="border border-white px-10 py-5 text-xs font-bold uppercase tracking-widest text-white transition-all hover:bg-white hover:text-[color:var(--ocean-deep)]"
               >
                 Nous contacter
               </Link>
             </div>
           </motion.div>
         </div>
-
-        {/* Wave divider */}
-        <svg
-          className="absolute bottom-0 left-0 w-full text-background"
-          viewBox="0 0 1440 120"
-          preserveAspectRatio="none"
-          aria-hidden
-        >
-          <path
-            fill="currentColor"
-            d="M0,64 C240,120 480,20 720,50 C960,80 1200,110 1440,60 L1440,120 L0,120 Z"
-          />
-        </svg>
       </section>
 
-      {/* STATS */}
-      <section className="mx-auto max-w-7xl px-6 -mt-6">
-        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border/60 bg-border/40 shadow-luxe md:grid-cols-4">
-          {[
-            { k: "20+", v: "années d'expertise" },
-            { k: "80+", v: "espèces travaillées" },
-            { k: "15", v: "pays d'export" },
-            { k: "24/7", v: "chaîne du froid" },
-          ].map((s) => (
-            <div key={s.v} className="bg-card/90 p-8 text-center">
-              <div className="font-display text-4xl text-gradient-gold md:text-5xl">
+      {/* METRIC BAR — overlapping hero */}
+      <div className="relative z-20 mx-auto -mt-12 max-w-7xl px-8">
+        <div
+          className="grid grid-cols-2 bg-card md:grid-cols-4"
+          style={{ boxShadow: "0 20px 50px color-mix(in oklab, var(--ocean-deep) 12%, transparent)" }}
+        >
+          {stats.map((s, i) => (
+            <div
+              key={s.v}
+              className={`p-10 text-center ${i < stats.length - 1 ? "border-r border-border/50" : ""}`}
+            >
+              <div
+                className={`mb-2 text-4xl font-bold text-[color:var(--ocean-deep)] ${s.italic ? "font-display italic" : ""}`}
+              >
                 {s.k}
               </div>
-              <div className="mt-2 text-[11px] font-medium uppercase tracking-[0.22em] text-muted-foreground">
+              <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold">
                 {s.v}
               </div>
             </div>
           ))}
         </div>
-      </section>
+      </div>
 
-      {/* SIGNATURE */}
-      <section className="mx-auto max-w-7xl px-6 py-32">
-        <div className="grid gap-16 md:grid-cols-2 md:items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="text-[10px] font-semibold uppercase tracking-[0.28em] text-gold">
-              Notre signature
-            </div>
-            <h2 className="mt-4 font-display text-4xl leading-tight md:text-5xl">
-              Une côte, un savoir-faire,
-              <br />
-              <span className="text-gradient-gold">une exigence.</span>
-            </h2>
-            <p className="mt-6 leading-relaxed text-muted-foreground">
-              Les eaux de la Mauritanie comptent parmi les plus poissonneuses
-              du monde. Nous conjuguons la richesse de cette ressource à un
-              conditionnement rigoureux — tri par calibre, mise sous glace
-              immédiate, congélation rapide — pour livrer un produit fidèle
-              à la mer dont il vient.
-            </p>
-            <ul className="mt-8 space-y-3 text-sm">
-              {[
-                "Sélection quotidienne au débarquement",
-                "Chaîne du froid maîtrisée de bout en bout",
-                "Conditionnement adapté à chaque marché",
-                "Traçabilité et documentation d'export complètes",
-              ].map((line) => (
-                <li key={line} className="flex items-start gap-3">
-                  <span className="mt-1.5 h-1.5 w-1.5 flex-none rounded-full bg-gold" />
-                  <span className="text-foreground/85">{line}</span>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.9 }}
-            className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-border/70 shadow-luxe"
-          >
-            <img
-              src={featured[0].image}
-              alt=""
-              loading="lazy"
-              className="h-full w-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
-            <div className="absolute inset-x-8 bottom-8">
-              <div className="text-[10px] font-semibold uppercase tracking-[0.28em] text-gold">
-                Produit signature
-              </div>
-              <div className="mt-2 font-display text-3xl">Poulpe atlantique</div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* SPECIES PREVIEW */}
-      <section className="mx-auto max-w-7xl px-6 py-24">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <div className="text-[10px] font-semibold uppercase tracking-[0.28em] text-gold">
-              Nos catégories
-            </div>
-            <h2 className="mt-3 font-display text-4xl md:text-5xl">
-              Une sélection <span className="text-gradient-gold">océane</span>
-            </h2>
-          </div>
-          <Link
-            to="/especes"
-            className="text-xs font-semibold uppercase tracking-[0.22em] text-gold hover:underline"
-          >
-            Voir toutes les espèces →
-          </Link>
+      {/* SPECIES CATALOG */}
+      <section className="mx-auto max-w-7xl px-8 py-32">
+        <div className="mb-20 max-w-xl">
+          <h2 className="mb-6 font-display text-5xl font-bold italic text-[color:var(--ocean-deep)]">
+            Nos espèces signatures
+          </h2>
+          <div className="mb-6 h-1 w-20 bg-gold" />
+          <p className="text-lg font-light leading-relaxed text-muted-foreground">
+            Une sélection rigoureuse de produits sauvages, pêchés
+            durablement dans les eaux pures de Mauritanie.
+          </p>
         </div>
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-x-8 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
           {featured.map((s, i) => (
             <motion.div
               key={s.slug}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.6, delay: (i % 3) * 0.08 }}
-              className="group relative aspect-[4/5] overflow-hidden rounded-2xl border border-border/60 shadow-luxe"
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.7, delay: (i % 3) * 0.08 }}
+              className="group"
             >
-              <img
-                src={s.image}
-                alt={s.name}
-                loading="lazy"
-                className="h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/40 to-transparent" />
-              <div className="absolute inset-x-6 bottom-6">
-                <div className="text-[10px] font-semibold uppercase tracking-[0.24em] text-gold">
-                  {s.variants.length} calibres
-                </div>
-                <div className="mt-1 font-display text-2xl">{s.name}</div>
-                {s.latin && (
-                  <div className="text-xs italic text-muted-foreground">
-                    {s.latin}
-                  </div>
-                )}
+              <div className="relative mb-6 aspect-[3/4] overflow-hidden bg-secondary">
+                <img
+                  src={s.image}
+                  alt={s.name}
+                  loading="lazy"
+                  className="h-full w-full object-cover transition-transform duration-[1000ms] group-hover:scale-105"
+                />
+                <div className="pointer-events-none absolute inset-4 border border-gold/25" />
               </div>
+              <h3 className="mb-2 font-display text-2xl font-bold text-[color:var(--ocean-deep)]">
+                {s.name}
+              </h3>
+              {s.latin && (
+                <p className="text-xs uppercase tracking-widest text-gold">
+                  {s.latin}
+                </p>
+              )}
             </motion.div>
           ))}
         </div>
+
+        <div className="mt-16 flex justify-center">
+          <Link
+            to="/especes"
+            className="border-b-2 border-gold pb-2 text-xs font-bold uppercase tracking-widest text-gold"
+          >
+            Voir tout le catalogue →
+          </Link>
+        </div>
       </section>
 
-      {/* EXPORT */}
-      <section className="relative isolate my-24 overflow-hidden py-32">
-        <img
-          src={exportImg}
-          alt=""
-          className="absolute inset-0 h-full w-full object-cover"
-          loading="lazy"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/50" />
-        <div className="relative mx-auto max-w-4xl px-6 text-center">
-          <div className="text-[10px] font-semibold uppercase tracking-[0.28em] text-gold">
-            Exportation
+      {/* EXPORT & LOGISTICS — split screen */}
+      <section className="overflow-hidden bg-muted">
+        <div className="flex flex-col lg:flex-row">
+          <div className="flex w-full flex-col justify-center p-16 lg:w-1/2 lg:p-24 xl:p-32">
+            <span className="mb-4 text-xs font-bold uppercase tracking-widest text-gold">
+              Maîtrise logistique
+            </span>
+            <h2 className="mb-10 font-display text-4xl font-bold leading-tight text-[color:var(--ocean-deep)] md:text-5xl">
+              Une logistique sans faille
+              <br />
+              vers 15 pays.
+            </h2>
+            <div className="space-y-12">
+              {[
+                {
+                  n: "01.",
+                  t: "Certification & traçabilité",
+                  d: "Nos installations répondent aux normes sanitaires internationales les plus strictes pour garantir la sécurité et la fraîcheur de chaque lot.",
+                },
+                {
+                  n: "02.",
+                  t: "Exportation mondiale",
+                  d: "Des solutions d'expédition par air et par mer, assurant une livraison optimale sur les marchés européens, asiatiques et africains.",
+                },
+                {
+                  n: "03.",
+                  t: "Chaîne du froid maîtrisée",
+                  d: "Congélation IQF immédiate, entreposage et transport réfrigéré jusqu'au port de destination.",
+                },
+              ].map((item) => (
+                <div key={item.n} className="flex items-start gap-6">
+                  <span className="font-display text-2xl italic text-gold">
+                    {item.n}
+                  </span>
+                  <div>
+                    <h4 className="mb-3 text-xl font-bold text-[color:var(--ocean-deep)]">
+                      {item.t}
+                    </h4>
+                    <p className="font-light leading-relaxed text-muted-foreground">
+                      {item.d}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-14">
+              <Link
+                to="/contact"
+                className="inline-block bg-gold px-10 py-5 text-xs font-bold uppercase tracking-widest text-white transition-all hover:-translate-y-1 hover:brightness-95"
+              >
+                Demander une cotation
+              </Link>
+            </div>
           </div>
-          <h2 className="mt-4 font-display text-4xl leading-tight md:text-6xl">
-            De Nouakchott vers
-            <br />
-            <span className="text-gradient-gold">les grandes tables du monde.</span>
-          </h2>
-          <p className="mx-auto mt-8 max-w-2xl leading-relaxed text-muted-foreground">
-            Congélation IQF, conditionnement en cartons, palettisation
-            certifiée et documentation d'export prête à embarquer. Nous
-            assurons chaque étape logistique jusqu'au port de destination.
-          </p>
-          <Link
-            to="/contact"
-            className="mt-10 inline-flex rounded-full bg-gradient-gold px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-gold-foreground shadow-gold-glow"
-          >
-            Demander une cotation
-          </Link>
+          <div className="relative min-h-[600px] w-full bg-secondary lg:w-1/2">
+            <img
+              src={exportImg}
+              alt=""
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div
+              className="absolute inset-0 mix-blend-multiply"
+              style={{ background: "color-mix(in oklab, var(--ocean-deep) 20%, transparent)" }}
+            />
+          </div>
         </div>
       </section>
     </>
