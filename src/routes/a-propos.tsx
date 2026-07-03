@@ -28,8 +28,8 @@ function AboutPage() {
     <>
       {/* HERO */}
       <section className="relative isolate overflow-hidden py-32">
-        <img src={oceanHero} alt="" className="absolute inset-0 h-full w-full object-cover opacity-30" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/70 to-background" />
+        <img src={oceanHero} alt="" className="absolute inset-0 h-full w-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/75 to-background" />
         <div className="relative mx-auto max-w-4xl px-6 text-center">
           <div className="text-[10px] font-semibold uppercase tracking-[0.28em] text-gold">
             À propos
