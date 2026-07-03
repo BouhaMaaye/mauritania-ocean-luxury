@@ -46,7 +46,8 @@ function HomePage() {
           width={1920}
           height={1280}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/50 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
 
         {/* 3D canvas overlay */}
         <div className="absolute inset-0 opacity-50 mix-blend-multiply">
