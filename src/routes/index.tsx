@@ -42,14 +42,15 @@ function HomePage() {
         <img
           src={oceanHero}
           alt=""
-          className="absolute inset-0 h-full w-full object-cover opacity-40"
+          className="absolute inset-0 h-full w-full object-cover"
           width={1920}
           height={1280}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/70 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
 
         {/* 3D canvas overlay */}
-        <div className="absolute inset-0 opacity-70">
+        <div className="absolute inset-0 opacity-50 mix-blend-multiply">
           <Suspense fallback={null}>
             <OceanScene />
           </Suspense>
@@ -248,10 +249,10 @@ function HomePage() {
         <img
           src={exportImg}
           alt=""
-          className="absolute inset-0 h-full w-full object-cover opacity-30"
+          className="absolute inset-0 h-full w-full object-cover"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/50" />
         <div className="relative mx-auto max-w-4xl px-6 text-center">
           <div className="text-[10px] font-semibold uppercase tracking-[0.28em] text-gold">
             Exportation
