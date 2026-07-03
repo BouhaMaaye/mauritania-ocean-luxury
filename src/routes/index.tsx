@@ -28,7 +28,7 @@ export const Route = createFileRoute("/")({
 });
 
 function HomePage() {
-  const featured = speciesCategories.slice(0, 6);
+  const featured = speciesCategories.slice(0, 4);
   const stats = [
     { k: "20+", v: "Années d'expertise" },
     { k: "80+", v: "Espèces traitées" },
@@ -44,7 +44,7 @@ function HomePage() {
           <img
             src={oceanHero}
             alt=""
-            className="h-full w-full object-cover brightness-75"
+            className="h-full w-full scale-105 object-cover blur-sm brightness-75"
             width={1920}
             height={1080}
           />
@@ -135,7 +135,7 @@ function HomePage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-x-8 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-4">
           {featured.map((s, i) => (
             <motion.div
               key={s.slug}
@@ -230,12 +230,12 @@ function HomePage() {
               </Link>
             </div>
           </div>
-          <div className="relative min-h-[600px] w-full bg-secondary lg:w-1/2">
+          <div className="relative min-h-[600px] w-full overflow-hidden bg-secondary lg:w-1/2">
             <img
               src={exportImg}
               alt=""
               loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover"
+              className="absolute inset-0 h-full w-full scale-105 object-cover blur-[2px]"
             />
             <div
               className="absolute inset-0 mix-blend-multiply"
