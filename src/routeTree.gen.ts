@@ -9,11 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as QualiteRouteImport } from './routes/qualite'
 import { Route as EspecesRouteImport } from './routes/especes'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AProposRouteImport } from './routes/a-propos'
 import { Route as IndexRouteImport } from './routes/index'
 
+const QualiteRoute = QualiteRouteImport.update({
+  id: '/qualite',
+  path: '/qualite',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EspecesRoute = EspecesRouteImport.update({
   id: '/especes',
   path: '/especes',
@@ -40,12 +46,14 @@ export interface FileRoutesByFullPath {
   '/a-propos': typeof AProposRoute
   '/contact': typeof ContactRoute
   '/especes': typeof EspecesRoute
+  '/qualite': typeof QualiteRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/a-propos': typeof AProposRoute
   '/contact': typeof ContactRoute
   '/especes': typeof EspecesRoute
+  '/qualite': typeof QualiteRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,14 @@ export interface FileRoutesById {
   '/a-propos': typeof AProposRoute
   '/contact': typeof ContactRoute
   '/especes': typeof EspecesRoute
+  '/qualite': typeof QualiteRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/a-propos' | '/contact' | '/especes'
+  fullPaths: '/' | '/a-propos' | '/contact' | '/especes' | '/qualite'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/a-propos' | '/contact' | '/especes'
-  id: '__root__' | '/' | '/a-propos' | '/contact' | '/especes'
+  to: '/' | '/a-propos' | '/contact' | '/especes' | '/qualite'
+  id: '__root__' | '/' | '/a-propos' | '/contact' | '/especes' | '/qualite'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,10 +76,18 @@ export interface RootRouteChildren {
   AProposRoute: typeof AProposRoute
   ContactRoute: typeof ContactRoute
   EspecesRoute: typeof EspecesRoute
+  QualiteRoute: typeof QualiteRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/qualite': {
+      id: '/qualite'
+      path: '/qualite'
+      fullPath: '/qualite'
+      preLoaderRoute: typeof QualiteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/especes': {
       id: '/especes'
       path: '/especes'
@@ -107,6 +124,7 @@ const rootRouteChildren: RootRouteChildren = {
   AProposRoute: AProposRoute,
   ContactRoute: ContactRoute,
   EspecesRoute: EspecesRoute,
+  QualiteRoute: QualiteRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
