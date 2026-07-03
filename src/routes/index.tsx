@@ -44,7 +44,7 @@ function HomePage() {
           <img
             src={oceanHero}
             alt=""
-            className="h-full w-full scale-105 object-cover blur-sm brightness-75"
+            className="h-full w-full scale-105 object-cover blur-[2px]"
             width={1920}
             height={1080}
           />
@@ -52,7 +52,7 @@ function HomePage() {
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(to right, var(--ocean-deep) 0%, color-mix(in oklab, var(--ocean-deep) 80%, transparent) 45%, transparent 100%)",
+                "linear-gradient(to right, color-mix(in oklab, var(--ocean-deep) 65%, transparent) 0%, color-mix(in oklab, var(--ocean-deep) 25%, transparent) 45%, transparent 100%)",
             }}
           />
         </div>
