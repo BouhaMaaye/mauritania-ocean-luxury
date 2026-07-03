@@ -170,19 +170,19 @@ function HomePage() {
       </section>
 
       {/* QUALITY & ENGAGEMENTS */}
-      <section className="bg-[color:var(--ocean-deep)] py-32 text-white">
+      <section className="bg-muted py-32">
         <div className="mx-auto max-w-7xl px-8">
           <div className="mb-20 grid gap-10 lg:grid-cols-12">
             <div className="lg:col-span-5">
               <span className="text-xs font-bold uppercase tracking-[0.3em] text-gold">
                 Notre exigence
               </span>
-              <h2 className="mt-6 font-display text-4xl font-bold leading-tight md:text-5xl">
+              <h2 className="mt-6 font-display text-4xl font-bold leading-tight text-[color:var(--ocean-deep)] md:text-5xl">
                 La qualité, <span className="italic text-gold">notre signature</span>.
               </h2>
               <div className="mt-6 h-1 w-16 bg-gold" />
             </div>
-            <p className="text-lg font-light leading-relaxed text-white/80 lg:col-span-7">
+            <p className="text-lg font-light leading-relaxed text-muted-foreground lg:col-span-7">
               Chaque produit qui quitte nos ateliers reflète un engagement
               sans compromis : fraîcheur préservée, procédés certifiés et
               contrôle rigoureux à chaque étape, du débarquement jusqu'au
@@ -190,7 +190,7 @@ function HomePage() {
             </p>
           </div>
 
-          <div className="grid gap-px bg-white/10 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-px bg-border md:grid-cols-2 lg:grid-cols-4">
             {[
               {
                 n: "01",
@@ -213,16 +213,25 @@ function HomePage() {
                 d: "Audits internes, laboratoires partenaires et suivi documentaire pour chaque expédition.",
               },
             ].map((item) => (
-              <div key={item.n} className="bg-[color:var(--ocean-deep)] p-10">
+              <div key={item.n} className="bg-card p-10">
                 <div className="mb-6 font-display text-3xl italic text-gold">
                   {item.n}
                 </div>
-                <h3 className="mb-4 text-xl font-bold">{item.t}</h3>
-                <p className="text-sm font-light leading-relaxed text-white/70">
+                <h3 className="mb-4 text-xl font-bold text-[color:var(--ocean-deep)]">{item.t}</h3>
+                <p className="text-sm font-light leading-relaxed text-muted-foreground">
                   {item.d}
                 </p>
               </div>
             ))}
+          </div>
+
+          <div className="mt-16 flex justify-center">
+            <Link
+              to="/qualite"
+              className="border-b-2 border-gold pb-2 text-xs font-bold uppercase tracking-widest text-gold"
+            >
+              Normes & certifications →
+            </Link>
           </div>
         </div>
       </section>
