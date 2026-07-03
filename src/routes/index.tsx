@@ -42,14 +42,14 @@ function HomePage() {
         <img
           src={oceanHero}
           alt=""
-          className="absolute inset-0 h-full w-full object-cover opacity-40"
+          className="absolute inset-0 h-full w-full object-cover"
           width={1920}
           height={1280}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/70 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/50 to-background" />
 
         {/* 3D canvas overlay */}
-        <div className="absolute inset-0 opacity-70">
+        <div className="absolute inset-0 opacity-50 mix-blend-multiply">
           <Suspense fallback={null}>
             <OceanScene />
           </Suspense>
