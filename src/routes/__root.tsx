@@ -18,7 +18,7 @@ import {
 import { useEffect, useState, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import logoAsset from "../assets/logo.png.asset.json";
+import logoUrl from "../assets/National_logo.png";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 const NAV = [
@@ -36,7 +36,7 @@ function Header() {
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
         <Link to="/" className="flex items-center gap-3 group">
           <img
-            src={logoAsset.url}
+            src={logoUrl}
             alt="Nationale Peche SARL"
             width={48}
             height={48}
@@ -70,12 +70,6 @@ function Header() {
               )}
             </Link>
           ))}
-          <Link
-            to="/contact"
-            className="ml-4 rounded-full bg-gradient-gold px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-gold-foreground shadow-gold-glow transition-transform hover:scale-[1.03]"
-          >
-            Demander un devis
-          </Link>
         </nav>
 
         <button
@@ -116,7 +110,7 @@ function Footer() {
       <div className="mx-auto grid max-w-7xl gap-10 px-6 py-16 md:grid-cols-4">
         <div className="md:col-span-2">
           <div className="flex items-center gap-3">
-            <img src={logoAsset.url} alt="" width={44} height={44} className="h-11 w-11 object-contain" />
+            <img src={logoUrl} alt="" width={44} height={44} className="h-11 w-11 object-contain" />
             <div>
               <div className="font-display text-xl">Nationale Peche SARL</div>
               <div className="text-[10px] uppercase tracking-[0.28em] text-gold">
@@ -154,7 +148,7 @@ function Footer() {
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
             Socogim lot N° 111<br />
             Près de l'avenue de l'aéroport<br />
-            BP 1024 · Nouakchott<br />
+            BP 1024 · Nouadhibou<br />
             Mauritanie
           </p>
         </div>
@@ -243,7 +237,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: logoAsset.url, type: "image/png" },
+      { rel: "icon", href: logoUrl, type: "image/png" },
     ],
   }),
   shellComponent: RootShell,

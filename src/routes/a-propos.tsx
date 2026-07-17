@@ -10,7 +10,7 @@ export const Route = createFileRoute("/a-propos")({
       {
         name: "description",
         content:
-          "Nationale Peche SARL, société mauritanienne de pêche et d'exportation basée à Nouakchott. Découvrez notre histoire, notre mission et nos engagements qualité.",
+          "Nationale Peche SARL, société mauritanienne de pêche et d'exportation basée à Nouadhibou. Découvrez notre histoire, notre mission et nos engagements qualité.",
       },
       { property: "og:title", content: "À propos — Nationale Peche SARL" },
       {
@@ -41,8 +41,7 @@ function AboutPage() {
           </h1>
           <p className="mx-auto mt-8 max-w-2xl leading-relaxed text-muted-foreground">
             Née sur la façade atlantique de la Mauritanie, Nationale Peche
-            SARL cultive depuis deux décennies un lien intime avec la mer
-            et ses ressources.
+            SARL cultive un lien intime avec la mer et ses ressources.
           </p>
         </div>
       </section>
@@ -62,7 +61,7 @@ function AboutPage() {
             <h2 className="mt-4 font-display text-4xl">Une maison, une côte.</h2>
             <div className="mt-6 space-y-5 text-muted-foreground leading-relaxed">
               <p>
-                Fondée à Nouakchott, Nationale Peche SARL s'inscrit dans la
+                Fondée à Nouadhibou, Nationale Peche SARL s'inscrit dans la
                 grande tradition des maisons de négoce mauritaniennes. Notre
                 métier : rassembler les meilleures pêches débarquées le long
                 du littoral et les préparer pour les marchés les plus

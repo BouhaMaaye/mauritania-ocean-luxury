@@ -77,7 +77,7 @@ function QualitePage() {
           </div>
           <div className="space-y-6 text-lg font-light leading-relaxed text-muted-foreground lg:col-span-8">
             <p>
-              Depuis Nouakchott, <strong className="font-semibold text-[color:var(--ocean-deep)]">Nationale Pêche SARL</strong> opère
+              Depuis Nouadhibou, <strong className="font-semibold text-[color:var(--ocean-deep)]">Nationale Pêche SARL</strong> opère
               sous la supervision permanente de l'
               <strong className="font-semibold text-[color:var(--ocean-deep)]">ONISPA</strong>
               {" "}(Office National d'Inspection Sanitaire des Produits de la

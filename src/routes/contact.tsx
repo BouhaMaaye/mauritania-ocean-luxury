@@ -9,13 +9,13 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Contactez Nationale Peche SARL à Nouakchott, Mauritanie. Téléphone, email et adresse pour vos demandes de devis et d'exportation.",
+          "Contactez Nationale Peche SARL à Nouadhibou, Mauritanie. Téléphone, email et adresse pour vos demandes de devis et d'exportation.",
       },
       { property: "og:title", content: "Contact — Nationale Peche SARL" },
       {
         property: "og:description",
         content:
-          "Demandez un devis ou une cotation export à Nationale Peche SARL, Nouakchott.",
+          "Demandez un devis ou une cotation export à Nationale Peche SARL, Nouadhibou.",
       },
     ],
   }),
@@ -84,7 +84,7 @@ function ContactPage() {
                 {
                   label: "Adresse",
                   value:
-                    "Socogim lot N° 111, près de l'avenue de l'aéroport, BP 1024, Nouakchott, Mauritanie",
+                    "Socogim lot N° 111, près de l'avenue de l'aéroport, BP 1024, Nouadhibou, Mauritanie",
                 },
                 { label: "NIF", value: "00760850" },
               ].map((item) => (

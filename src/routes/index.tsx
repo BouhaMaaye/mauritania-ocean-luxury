@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { speciesCategories } from "@/data/species";
-import oceanHero from "@/assets/ocean-hero.jpg";
+import { ScrollFrameHero } from "@/components/ScrollFrameHero";
 import exportImg from "@/assets/export.jpg";
+import logoUrl from "@/assets/National_logo.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -11,7 +12,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Nationale Peche SARL exporte poulpe, calamar, crevettes, mérou et poissons nobles depuis Nouakchott vers les marchés internationaux.",
+          "Nationale Peche SARL exporte poulpe, calamar, crevettes, mérou et poissons nobles depuis Nouadhibou vers les marchés internationaux.",
       },
       {
         property: "og:title",
@@ -30,7 +31,7 @@ export const Route = createFileRoute("/")({
 function HomePage() {
   const featured = speciesCategories.slice(0, 4);
   const stats = [
-    { k: "20+", v: "Années d'expertise" },
+    { k: "100%", v: "Traçabilité garantie" },
     { k: "80+", v: "Espèces traitées" },
     { k: "15", v: "Pays d'export" },
     { k: "24/7", v: "Chaîne du froid", italic: true },
@@ -38,65 +39,8 @@ function HomePage() {
 
   return (
     <>
-      {/* HERO — full-bleed image with navy overlay from left */}
-      <section className="relative flex min-h-[90vh] items-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img
-            src={oceanHero}
-            alt=""
-            className="h-full w-full scale-105 object-cover blur-[2px]"
-            width={1920}
-            height={1080}
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(to right, color-mix(in oklab, var(--ocean-deep) 65%, transparent) 0%, color-mix(in oklab, var(--ocean-deep) 25%, transparent) 45%, transparent 100%)",
-            }}
-          />
-        </div>
-
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: "easeOut" }}
-            className="max-w-3xl"
-          >
-            <div className="mb-8 flex items-center gap-4">
-              <div className="h-px w-12 bg-gold" />
-              <span className="text-sm font-semibold uppercase tracking-[0.3em] text-gold">
-                Excellence halieutique
-              </span>
-            </div>
-            <h1 className="mb-8 font-display text-6xl font-bold leading-[1.1] text-white md:text-8xl">
-              Nationale Pêche
-              <br />
-              <span className="font-normal italic text-gold">SARL</span>
-            </h1>
-            <p className="mb-12 max-w-xl text-xl font-light leading-relaxed text-white/90 md:text-2xl">
-              Depuis plus de deux décennies, nous portons les richesses de
-              l'Atlantique mauritanien vers les tables les plus prestigieuses
-              du monde.
-            </p>
-            <div className="flex flex-wrap gap-6">
-              <Link
-                to="/especes"
-                className="bg-gold px-10 py-5 text-xs font-bold uppercase tracking-widest text-white transition-all hover:-translate-y-1 hover:brightness-95"
-              >
-                Catalogue des espèces
-              </Link>
-              <Link
-                to="/contact"
-                className="border border-white px-10 py-5 text-xs font-bold uppercase tracking-widest text-white transition-all hover:bg-white hover:text-[color:var(--ocean-deep)]"
-              >
-                Nous contacter
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      {/* HERO — cinematic scroll-scrubbed image sequence (Apple-style) */}
+      <ScrollFrameHero />
 
       {/* METRIC BAR — overlapping hero */}
       <div className="relative z-20 mx-auto -mt-12 max-w-7xl px-8">
@@ -126,10 +70,17 @@ function HomePage() {
       <section className="mx-auto max-w-7xl px-8 pt-32">
         <div className="grid gap-16 lg:grid-cols-12 lg:gap-24">
           <div className="lg:col-span-4">
-            <span className="text-xs font-bold uppercase tracking-[0.3em] text-gold">
+            <span className="block text-xs font-bold uppercase tracking-[0.3em] text-gold">
               Notre maison
             </span>
             <div className="mt-6 h-1 w-16 bg-gold" />
+            <img
+              src={logoUrl}
+              alt="Nationale Peche SARL"
+              width={200}
+              height={200}
+              className="mt-10 h-40 w-40 object-contain"
+            />
           </div>
           <div className="lg:col-span-8">
             <h2 className="mb-10 font-display text-4xl font-bold leading-tight text-[color:var(--ocean-deep)] md:text-5xl">
@@ -139,10 +90,9 @@ function HomePage() {
             </h2>
             <div className="space-y-6 text-lg font-light leading-relaxed text-muted-foreground">
               <p>
-                Fondée à Nouakchott, <strong className="font-semibold text-[color:var(--ocean-deep)]">Nationale Pêche SARL</strong> conjugue
-                depuis plus de vingt ans savoir-faire artisanal et exigence
-                industrielle pour offrir le meilleur de l'Atlantique
-                mauritanien.
+                Basée à Nouadhibou, <strong className="font-semibold text-[color:var(--ocean-deep)]">Nationale Pêche SARL</strong> conjugue
+                savoir-faire artisanal et exigence industrielle pour offrir
+                le meilleur de l'Atlantique mauritanien.
               </p>
               <p>
                 Nos équipes accompagnent chaque produit — du bateau au

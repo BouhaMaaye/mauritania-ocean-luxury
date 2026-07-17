@@ -6,10 +6,22 @@
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
+// Opt-in static export for GitHub Pages: `DEPLOY_TARGET=github-pages npm run build`.
+// Left unset, dev/build behave exactly as before (Lovable's default cloudflare target).
+const isGithubPages = process.env.DEPLOY_TARGET === "github-pages";
+const githubPagesBase = "/mauritania-ocean-luxury/";
+
 export default defineConfig({
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
+    ...(isGithubPages && {
+      prerender: { enabled: true, crawlLinks: true },
+    }),
   },
+  ...(isGithubPages && {
+    vite: { base: githubPagesBase },
+    nitro: false,
+  }),
 });

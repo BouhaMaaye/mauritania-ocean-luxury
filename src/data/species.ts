@@ -117,7 +117,7 @@ export const speciesCategories: SpeciesCategory[] = [
     slug: "langouste-crabe",
     name: "Langouste & Crabe",
     image: langouste,
-    tagline: "Crustacés nobles pêchés au large de Nouakchott.",
+    tagline: "Crustacés nobles pêchés au large de Nouadhibou.",
     variants: ["LANGOSTA", "CRABE"],
   },
   {
