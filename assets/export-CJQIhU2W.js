@@ -1,0 +1,1 @@
+var e=`/mauritania-ocean-luxury/assets/export-CtLsYWNf.jpg`;export{e as t};

@@ -1,0 +1,1 @@
+var e=`/mauritania-ocean-luxury/assets/ocean-hero-CGI39RUi.jpg`;export{e as t};
