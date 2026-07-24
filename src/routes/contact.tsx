@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { motion } from "motion/react";
+import { useI18n } from "@/lib/i18n/context";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -23,6 +24,7 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactPage() {
+  const { t } = useI18n();
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -32,9 +34,9 @@ function ContactPage() {
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const body = `Nom : ${form.name}\nEmail : ${form.email}\n\n${form.message}`;
+    const body = `${t.contact.mail.nameField} : ${form.name}\n${t.contact.mail.emailField} : ${form.email}\n\n${form.message}`;
     window.location.href = `mailto:hafedmohamedabdallahi@gmail.com?subject=${encodeURIComponent(
-      form.subject || "Demande de devis",
+      form.subject || t.contact.mail.defaultSubject,
     )}&body=${encodeURIComponent(body)}`;
   };
 
@@ -49,16 +51,15 @@ function ContactPage() {
             className="max-w-3xl"
           >
             <div className="text-[10px] font-semibold uppercase tracking-[0.28em] text-gold">
-              Contact
+              {t.contact.hero.kicker}
             </div>
             <h1 className="mt-4 font-display text-5xl md:text-7xl">
-              Parlons de votre
+              {t.contact.hero.titleLine1}
               <br />
-              <span className="text-gradient-gold">prochain envoi.</span>
+              <span className="text-gradient-gold">{t.contact.hero.titleGold}</span>
             </h1>
             <p className="mt-6 max-w-xl leading-relaxed text-muted-foreground">
-              Notre équipe répond à toutes vos demandes de devis, de calibres
-              spécifiques ou de conditionnement sur mesure.
+              {t.contact.hero.subtitle}
             </p>
           </motion.div>
 
@@ -67,26 +68,25 @@ function ContactPage() {
             <div className="lg:col-span-2 space-y-6">
               {[
                 {
-                  label: "Téléphone / Fax",
+                  label: t.contact.infoLabels.phone,
                   value: "+222 45 74 09 40 / 41",
                   href: "tel:+22245740940",
                 },
                 {
-                  label: "Mobile",
+                  label: t.contact.infoLabels.mobile,
                   value: "+222 22 06 30 81",
                   href: "tel:+22222063081",
                 },
                 {
-                  label: "Email",
+                  label: t.contact.infoLabels.email,
                   value: "hafedmohamedabdallahi@gmail.com",
                   href: "mailto:hafedmohamedabdallahi@gmail.com",
                 },
                 {
-                  label: "Adresse",
-                  value:
-                    "Socogim lot N° 111, près de l'avenue de l'aéroport, BP 1024, Nouadhibou, Mauritanie",
+                  label: t.contact.infoLabels.address,
+                  value: t.contact.addressValue,
                 },
-                { label: "NIF", value: "00760850" },
+                { label: t.contact.infoLabels.nif, value: "00760850" },
               ].map((item) => (
                 <div
                   key={item.label}
@@ -120,13 +120,13 @@ function ContactPage() {
               onSubmit={onSubmit}
               className="lg:col-span-3 rounded-3xl border border-border/70 bg-card/70 p-8 backdrop-blur-sm shadow-luxe md:p-10"
             >
-              <h2 className="font-display text-2xl">Envoyer une demande</h2>
+              <h2 className="font-display text-2xl">{t.contact.form.heading}</h2>
               <p className="mt-2 text-sm text-muted-foreground">
-                Votre message ouvrira votre application mail par défaut.
+                {t.contact.form.subtitle}
               </p>
 
               <div className="mt-8 grid gap-5 md:grid-cols-2">
-                <Field label="Nom complet">
+                <Field label={t.contact.form.nameLabel}>
                   <input
                     required
                     value={form.name}
@@ -134,7 +134,7 @@ function ContactPage() {
                     className="input-lux"
                   />
                 </Field>
-                <Field label="Email">
+                <Field label={t.contact.form.emailLabel}>
                   <input
                     required
                     type="email"
@@ -146,18 +146,18 @@ function ContactPage() {
               </div>
 
               <div className="mt-5">
-                <Field label="Sujet">
+                <Field label={t.contact.form.subjectLabel}>
                   <input
                     value={form.subject}
                     onChange={(e) => setForm({ ...form, subject: e.target.value })}
-                    placeholder="Demande de cotation, espèce recherchée…"
+                    placeholder={t.contact.form.subjectPlaceholder}
                     className="input-lux"
                   />
                 </Field>
               </div>
 
               <div className="mt-5">
-                <Field label="Message">
+                <Field label={t.contact.form.messageLabel}>
                   <textarea
                     required
                     rows={6}
@@ -172,7 +172,7 @@ function ContactPage() {
                 type="submit"
                 className="mt-8 w-full rounded-full bg-gradient-gold px-8 py-4 text-xs font-semibold uppercase tracking-[0.22em] text-gold-foreground shadow-gold-glow transition-transform hover:scale-[1.01] md:w-auto"
               >
-                Envoyer le message
+                {t.contact.form.submit}
               </button>
             </motion.form>
           </div>

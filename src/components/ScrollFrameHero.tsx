@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useFrameSequence } from "@/hooks/use-frame-sequence";
+import { useI18n } from "@/lib/i18n/context";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -22,6 +23,7 @@ function frameUrl(index: number) {
 const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 export function ScrollFrameHero() {
+  const { t } = useI18n();
   const sectionRef = useRef<HTMLDivElement>(null);
   const pinRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -135,30 +137,29 @@ export function ScrollFrameHero() {
                 <div className="mb-8 flex items-center gap-4">
                   <div className="h-px w-12 bg-gold" />
                   <span className="text-sm font-semibold uppercase tracking-[0.3em] text-gold">
-                    Excellence halieutique
+                    {t.hero.kicker}
                   </span>
                 </div>
                 <h1 className="mb-8 font-display text-6xl font-bold leading-[1.1] text-white md:text-8xl">
-                  Nationale Pêche
+                  {t.hero.titleLine1}
                   <br />
-                  <span className="font-normal italic text-gold">SARL</span>
+                  <span className="font-normal italic text-gold">{t.hero.titleLine2}</span>
                 </h1>
                 <p className="mb-12 max-w-xl text-xl font-light leading-relaxed text-white/90 md:text-2xl">
-                  Nous portons les richesses de l'Atlantique mauritanien vers
-                  les tables les plus prestigieuses du monde.
+                  {t.hero.subtitle}
                 </p>
                 <div className="pointer-events-auto flex flex-wrap gap-6">
                   <Link
                     to="/especes"
                     className="bg-gold px-10 py-5 text-xs font-bold uppercase tracking-widest text-white transition-all hover:-translate-y-1 hover:brightness-95"
                   >
-                    Catalogue des espèces
+                    {t.hero.ctaCatalog}
                   </Link>
                   <Link
                     to="/contact"
                     className="border border-white px-10 py-5 text-xs font-bold uppercase tracking-widest text-white transition-all hover:bg-white hover:text-[color:var(--ocean-deep)]"
                   >
-                    Nous contacter
+                    {t.hero.ctaContact}
                   </Link>
                 </div>
               </div>
@@ -169,7 +170,7 @@ export function ScrollFrameHero() {
         {!ready && (
           <div className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-6 bg-[color:var(--ocean-deep)]">
             <span className="text-xs font-bold uppercase tracking-[0.3em] text-gold">
-              Chargement de l'expérience
+              {t.hero.loadingLabel}
             </span>
             <div className="h-px w-48 overflow-hidden bg-white/15">
               <div

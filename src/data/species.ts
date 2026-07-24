@@ -1,22 +1,18 @@
-import poulpe from "@/assets/species/poulpe.jpg";
-import calamar from "@/assets/species/calamar.jpg";
-import seiche from "@/assets/species/seiche.jpg";
-import crevettes from "@/assets/species/crevettes.jpg";
-import langouste from "@/assets/species/langouste.jpg";
-import merou from "@/assets/species/merou.jpg";
-import courbine from "@/assets/species/courbine.jpg";
-import dorade from "@/assets/species/dorade.jpg";
-import sole from "@/assets/species/sole.jpg";
-import saintpierre from "@/assets/species/saintpierre.jpg";
-import pelagique from "@/assets/species/pelagique.jpg";
-import rouget from "@/assets/species/rouget.jpg";
-import divers from "@/assets/species/divers.jpg";
+import { useI18n } from "@/lib/i18n/context";
+import poulpe from "@/assets/Poulpe battu.jpg";
+import tako from "@/assets/Poulpe IQF.jpg";
+import sole from "@/assets/Lengua.jpg";
+import dorade from "@/assets/Pargo.jpg";
+import rouget from "@/assets/Perro.jpg";
+import pelagique from "@/assets/Chinchard.jpg";
+import langouste from "@/assets/langouste.jpg";
+import divers from "@/assets/Pescadilla.jpg";
 
 export type SpeciesCategory = {
   slug: string;
   name: string;
   latin?: string;
-  image: string;
+  image?: string;
   tagline: string;
   variants: string[];
 };
@@ -44,7 +40,6 @@ export const speciesCategories: SpeciesCategory[] = [
     slug: "calamar",
     name: "Calamar",
     latin: "Loligo vulgaris",
-    image: calamar,
     tagline: "Calamar entier trié par calibre, chair ferme et translucide.",
     variants: [
       "CALAMAR GG",
@@ -61,7 +56,6 @@ export const speciesCategories: SpeciesCategory[] = [
     slug: "seiche",
     name: "Seiche / Choco",
     latin: "Sepia officinalis",
-    image: seiche,
     tagline: "Seiche entière fraîche ou congelée, calibres exportation.",
     variants: [
       "CHOCO G",
@@ -78,7 +72,7 @@ export const speciesCategories: SpeciesCategory[] = [
     slug: "tako",
     name: "Tako",
     latin: "Octopus – marché japonais",
-    image: poulpe,
+    image: tako,
     tagline: "Poulpe préparé selon les standards asiatiques.",
     variants: [
       "TAKO 1",
@@ -95,7 +89,6 @@ export const speciesCategories: SpeciesCategory[] = [
     slug: "crevettes",
     name: "Crevettes & Gambas",
     latin: "Penaeus spp.",
-    image: crevettes,
     tagline: "Langostinos et gambas d'Afrique de l'Ouest, tous calibres.",
     variants: [
       "LANGOSTINO 1 → 7",
@@ -124,7 +117,6 @@ export const speciesCategories: SpeciesCategory[] = [
     slug: "merou",
     name: "Mérou / Cherne",
     latin: "Epinephelus spp.",
-    image: merou,
     tagline: "Mérou de fond, chair blanche recherchée sur les marchés premium.",
     variants: [
       "CHERNE F",
@@ -138,7 +130,6 @@ export const speciesCategories: SpeciesCategory[] = [
     slug: "courbine",
     name: "Courbine / Corvina",
     latin: "Argyrosomus regius",
-    image: courbine,
     tagline: "Courbine royale de l'Atlantique mauritanien.",
     variants: [
       "COURBINE (Argyrosomus regius)",
@@ -180,7 +171,6 @@ export const speciesCategories: SpeciesCategory[] = [
     slug: "saint-pierre",
     name: "Saint-Pierre",
     latin: "Zeus faber",
-    image: saintpierre,
     tagline: "Saint-Pierre entier, chair délicate et raffinée.",
     variants: [
       "ST PIETRO C/C",
@@ -250,3 +240,12 @@ export const speciesCategories: SpeciesCategory[] = [
     ],
   },
 ];
+
+export function useSpeciesCategories(): SpeciesCategory[] {
+  const { t } = useI18n();
+  return speciesCategories.map((s) => ({
+    ...s,
+    name: t.species[s.slug]?.name ?? s.name,
+    tagline: t.species[s.slug]?.tagline ?? s.tagline,
+  }));
+}

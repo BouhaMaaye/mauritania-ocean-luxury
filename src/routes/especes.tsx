@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { motion } from "motion/react";
-import { speciesCategories, type SpeciesCategory } from "@/data/species";
+import { useSpeciesCategories, type SpeciesCategory } from "@/data/species";
+import { useI18n } from "@/lib/i18n/context";
 
 export const Route = createFileRoute("/especes")({
   head: () => ({
@@ -24,6 +25,8 @@ export const Route = createFileRoute("/especes")({
 });
 
 function SpeciesPage() {
+  const { t } = useI18n();
+  const speciesCategories = useSpeciesCategories();
   const [query, setQuery] = useState("");
   const filtered = speciesCategories.filter((s) => {
     const q = query.trim().toLowerCase();
@@ -47,15 +50,14 @@ function SpeciesPage() {
             className="max-w-3xl"
           >
             <div className="text-[10px] font-semibold uppercase tracking-[0.28em] text-gold">
-              Catalogue
+              {t.especes.header.kicker}
             </div>
             <h1 className="mt-4 font-display text-5xl md:text-7xl text-foreground">
-              Nos <span className="text-gradient-gold">espèces</span>
+              {t.especes.header.titlePre}
+              <span className="text-gradient-gold">{t.especes.header.titleGold}</span>
             </h1>
             <p className="mt-6 max-w-xl leading-relaxed text-muted-foreground">
-              Céphalopodes, crustacés, poissons nobles et pélagiques —
-              découvrez nos catégories une par une, avec leurs calibres et
-              conditionnements disponibles à l'export.
+              {t.especes.header.subtitle}
             </p>
           </motion.div>
 
@@ -67,7 +69,7 @@ function SpeciesPage() {
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Rechercher une espèce, un calibre…"
+              placeholder={t.especes.header.searchPlaceholder}
               className="w-full bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
             />
           </div>
@@ -78,7 +80,7 @@ function SpeciesPage() {
       <section className="pb-32">
         {filtered.length === 0 ? (
           <p className="mx-auto max-w-6xl px-6 text-center text-muted-foreground py-24">
-            Aucune espèce ne correspond à votre recherche.
+            {t.especes.empty}
           </p>
         ) : (
           <div className="space-y-24 md:space-y-32">
@@ -99,7 +101,67 @@ function SpeciesBlock({
   species: SpeciesCategory;
   index: number;
 }) {
+  const { t } = useI18n();
   const reversed = index % 2 === 1;
+
+  if (!species.image) {
+    return (
+      <motion.article
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-120px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="mx-auto max-w-3xl px-6 text-center"
+      >
+        <div className="text-[10px] font-semibold uppercase tracking-[0.28em] text-gold">
+          {t.especes.categoryLabel} {String(index + 1).padStart(2, "0")}
+        </div>
+        <h2 className="mt-4 font-display text-4xl leading-tight text-foreground md:text-5xl">
+          {species.name}
+        </h2>
+        {species.latin && (
+          <p className="mt-2 text-sm italic text-muted-foreground">
+            {species.latin}
+          </p>
+        )}
+        <p className="mx-auto mt-6 max-w-lg leading-relaxed text-foreground/75">
+          {species.tagline}
+        </p>
+
+        <div className="mt-8 rounded-2xl border border-border bg-card p-6 shadow-sm">
+          <div className="flex items-baseline justify-between">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-gold">
+              {t.especes.variantsTitle}
+            </p>
+            <span className="text-xs font-medium text-muted-foreground">
+              {species.variants.length} {species.variants.length > 1 ? t.especes.referencePlural : t.especes.referenceSingular}
+            </span>
+          </div>
+          <ul className="mt-4 flex flex-wrap justify-center gap-2">
+            {species.variants.map((v) => (
+              <li
+                key={v}
+                className="rounded-lg border border-border bg-secondary px-3 py-1.5 text-xs font-medium text-foreground/85"
+              >
+                {v}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <a
+          href="/contact"
+          className="mt-8 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-gold hover:underline"
+        >
+          {t.especes.ctaQuote}
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M5 12h14M13 5l7 7-7 7" />
+          </svg>
+        </a>
+      </motion.article>
+    );
+  }
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 60 }}
@@ -125,7 +187,7 @@ function SpeciesBlock({
             />
             <div className="absolute left-5 top-5">
               <span className="rounded-full bg-gradient-gold px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-gold-foreground shadow-gold-glow">
-                Export
+                {t.especes.badgeExport}
               </span>
             </div>
             <div className="absolute right-5 top-5 rounded-full bg-card/95 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-foreground/80 backdrop-blur">
@@ -139,7 +201,7 @@ function SpeciesBlock({
           <div className="flex items-center gap-3">
             <span className="h-px w-10 bg-gold" />
             <div className="text-[10px] font-semibold uppercase tracking-[0.28em] text-gold">
-              Catégorie {String(index + 1).padStart(2, "0")}
+              {t.especes.categoryLabel} {String(index + 1).padStart(2, "0")}
             </div>
           </div>
           <h2 className="mt-4 font-display text-4xl leading-tight text-foreground md:text-5xl">
@@ -157,10 +219,10 @@ function SpeciesBlock({
           <div className="mt-8 rounded-2xl border border-border bg-card p-6 shadow-sm">
             <div className="flex items-baseline justify-between">
               <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-gold">
-                Calibres & conditionnements
+                {t.especes.variantsTitle}
               </p>
               <span className="text-xs font-medium text-muted-foreground">
-                {species.variants.length} référence{species.variants.length > 1 ? "s" : ""}
+                {species.variants.length} {species.variants.length > 1 ? t.especes.referencePlural : t.especes.referenceSingular}
               </span>
             </div>
             <ul className="mt-4 flex flex-wrap gap-2">
@@ -179,7 +241,7 @@ function SpeciesBlock({
             href="/contact"
             className="mt-8 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-gold hover:underline"
           >
-            Demander une cotation
+            {t.especes.ctaQuote}
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M5 12h14M13 5l7 7-7 7" />
             </svg>

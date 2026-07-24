@@ -20,17 +20,19 @@ import { useEffect, useState, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import logoUrl from "../assets/National_logo.png";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-
-const NAV = [
-  { to: "/", label: "Accueil" },
-  { to: "/a-propos", label: "À propos" },
-  { to: "/especes", label: "Espèces" },
-  { to: "/qualite", label: "Qualité" },
-  { to: "/contact", label: "Contact" },
-] as const;
+import { I18nProvider, useI18n } from "../lib/i18n/context";
+import { LanguageSwitcher } from "../components/LanguageSwitcher";
 
 function Header() {
   const [open, setOpen] = useState(false);
+  const { t } = useI18n();
+  const NAV = [
+    { to: "/", label: t.nav.home },
+    { to: "/a-propos", label: t.nav.about },
+    { to: "/especes", label: t.nav.species },
+    { to: "/qualite", label: t.nav.quality },
+    { to: "/contact", label: t.nav.contact },
+  ] as const;
   return (
     <header className="sticky top-0 z-50 border-b border-border/50 bg-background/70 backdrop-blur-xl">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
@@ -44,33 +46,36 @@ function Header() {
           />
           <div className="hidden sm:block leading-tight">
             <div className="font-display text-lg text-foreground">
-              Nationale Peche
+              {t.nav.brandName}
             </div>
             <div className="text-[10px] uppercase tracking-[0.28em] text-gold">
-              SARL · Mauritanie
+              {t.nav.brandTag}
             </div>
           </div>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-1">
-          {NAV.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className="relative px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-              activeProps={{ className: "text-foreground" }}
-            >
-              {({ isActive }) => (
-                <>
-                  {item.label}
-                  {isActive && (
-                    <span className="absolute inset-x-4 -bottom-0.5 h-px bg-gradient-gold" />
-                  )}
-                </>
-              )}
-            </Link>
-          ))}
-        </nav>
+        <div className="hidden md:flex items-center gap-2">
+          <nav className="flex items-center gap-1">
+            {NAV.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                className="relative px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                activeProps={{ className: "text-foreground" }}
+              >
+                {({ isActive }) => (
+                  <>
+                    {item.label}
+                    {isActive && (
+                      <span className="absolute inset-x-4 -bottom-0.5 h-px bg-gradient-gold" />
+                    )}
+                  </>
+                )}
+              </Link>
+            ))}
+          </nav>
+          <LanguageSwitcher className="ml-2 border-l border-border/60 pl-4" />
+        </div>
 
         <button
           onClick={() => setOpen((v) => !v)}
@@ -98,6 +103,9 @@ function Header() {
               </Link>
             ))}
           </nav>
+          <div className="border-t border-border/50 px-4 py-3">
+            <LanguageSwitcher />
+          </div>
         </div>
       )}
     </header>
@@ -105,6 +113,7 @@ function Header() {
 }
 
 function Footer() {
+  const { t } = useI18n();
   return (
     <footer className="mt-32 border-t border-border/60 bg-background/70 backdrop-blur">
       <div className="mx-auto grid max-w-7xl gap-10 px-6 py-16 md:grid-cols-4">
@@ -119,44 +128,42 @@ function Footer() {
             </div>
           </div>
           <p className="mt-5 max-w-md text-sm leading-relaxed text-muted-foreground">
-            Depuis la côte mauritanienne, nous sélectionnons, conditionnons et
-            exportons les meilleurs produits de la mer vers les marchés
-            européens, asiatiques et africains.
+            {t.footer.description}
           </p>
         </div>
 
         <div>
           <div className="text-[10px] font-semibold uppercase tracking-[0.24em] text-gold">
-            Contact
+            {t.footer.contactTitle}
           </div>
           <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-            <li>Tél / Fax : +222 45 74 09 40 / 41</li>
-            <li>Mobile : +222 22 06 30 81</li>
+            <li>{t.footer.phoneFaxLabel} : +222 45 74 09 40 / 41</li>
+            <li>{t.footer.mobileLabel} : +222 22 06 30 81</li>
             <li>
               <a href="mailto:hafedmohamedabdallahi@gmail.com" className="hover:text-gold">
                 hafedmohamedabdallahi@gmail.com
               </a>
             </li>
-            <li>NIF : 00760850</li>
+            <li>{t.footer.nifLabel} : 00760850</li>
           </ul>
         </div>
 
         <div>
           <div className="text-[10px] font-semibold uppercase tracking-[0.24em] text-gold">
-            Adresse
+            {t.footer.addressTitle}
           </div>
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-            Socogim lot N° 111<br />
-            Près de l'avenue de l'aéroport<br />
-            BP 1024 · Nouadhibou<br />
-            Mauritanie
+            {t.footer.addressLine1}<br />
+            {t.footer.addressLine2}<br />
+            {t.footer.addressLine3}<br />
+            {t.footer.addressLine4}
           </p>
         </div>
       </div>
       <div className="border-t border-border/60">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-6 py-6 text-xs text-muted-foreground md:flex-row md:items-center md:justify-between">
-          <span>© {new Date().getFullYear()} Nationale Peche SARL. Tous droits réservés.</span>
-          <span className="uppercase tracking-[0.24em] text-gold/80">Mauritania · Atlantic Ocean</span>
+          <span>© {new Date().getFullYear()} Nationale Peche SARL. {t.footer.rights}</span>
+          <span className="uppercase tracking-[0.24em] text-gold/80">{t.footer.tagline}</span>
         </div>
       </div>
     </footer>
@@ -164,19 +171,20 @@ function Footer() {
 }
 
 function NotFoundComponent() {
+  const { t } = useI18n();
   return (
     <div className="flex min-h-[70vh] items-center justify-center px-4">
       <div className="max-w-md text-center">
-        <h1 className="font-display text-8xl text-gradient-gold">404</h1>
-        <h2 className="mt-4 font-display text-2xl">Page introuvable</h2>
+        <h1 className="font-display text-8xl text-gradient-gold">{t.notFound.title}</h1>
+        <h2 className="mt-4 font-display text-2xl">{t.notFound.subtitle}</h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          Cette page n'existe pas ou a été déplacée.
+          {t.notFound.text}
         </p>
         <Link
           to="/"
           className="mt-6 inline-flex rounded-full bg-gradient-gold px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-gold-foreground shadow-gold-glow"
         >
-          Retour à l'accueil
+          {t.notFound.cta}
         </Link>
       </div>
     </div>
@@ -185,15 +193,16 @@ function NotFoundComponent() {
 
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   const router = useRouter();
+  const { t } = useI18n();
   useEffect(() => {
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
   return (
     <div className="flex min-h-[70vh] items-center justify-center px-4">
       <div className="max-w-md text-center">
-        <h1 className="font-display text-2xl">Une erreur est survenue</h1>
+        <h1 className="font-display text-2xl">{t.errorPage.title}</h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Merci de réessayer ou de revenir plus tard.
+          {t.errorPage.text}
         </p>
         <div className="mt-6 flex justify-center gap-3">
           <button
@@ -203,13 +212,13 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
             }}
             className="rounded-full bg-gradient-gold px-5 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-gold-foreground shadow-gold-glow"
           >
-            Réessayer
+            {t.errorPage.retry}
           </button>
           <a
             href="/"
             className="rounded-full border border-border px-5 py-2 text-xs font-semibold uppercase tracking-[0.18em]"
           >
-            Accueil
+            {t.errorPage.home}
           </a>
         </div>
       </div>
@@ -253,7 +262,7 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        {children}
+        <I18nProvider>{children}</I18nProvider>
         <Scripts />
       </body>
     </html>
