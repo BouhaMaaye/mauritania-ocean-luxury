@@ -69,24 +69,18 @@ function ContactPage() {
               {[
                 {
                   label: t.contact.infoLabels.phone,
-                  value: "+222 45 74 09 40 / 41",
-                  href: "tel:+22245740940",
+                  value: "+34 928 58 11 66",
+                  href: "tel:+34928581166",
                 },
                 {
                   label: t.contact.infoLabels.mobile,
-                  value: "+222 22 06 30 81",
-                  href: "tel:+22222063081",
-                },
-                {
-                  label: t.contact.infoLabels.email,
-                  value: "hafedmohamedabdallahi@gmail.com",
-                  href: "mailto:hafedmohamedabdallahi@gmail.com",
+                  value: "+34 619 22 24 00",
+                  href: "tel:+34619222400",
                 },
                 {
                   label: t.contact.infoLabels.address,
                   value: t.contact.addressValue,
                 },
-                { label: t.contact.infoLabels.nif, value: "00760850" },
               ].map((item) => (
                 <div
                   key={item.label}

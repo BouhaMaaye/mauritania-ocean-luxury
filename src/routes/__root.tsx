@@ -137,14 +137,8 @@ function Footer() {
             {t.footer.contactTitle}
           </div>
           <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-            <li>{t.footer.phoneFaxLabel} : +222 45 74 09 40 / 41</li>
-            <li>{t.footer.mobileLabel} : +222 22 06 30 81</li>
-            <li>
-              <a href="mailto:hafedmohamedabdallahi@gmail.com" className="hover:text-gold">
-                hafedmohamedabdallahi@gmail.com
-              </a>
-            </li>
-            <li>{t.footer.nifLabel} : 00760850</li>
+            <li>{t.footer.phoneFaxLabel} : +34 928 58 11 66</li>
+            <li>{t.footer.mobileLabel} : +34 619 22 24 00</li>
           </ul>
         </div>
 
