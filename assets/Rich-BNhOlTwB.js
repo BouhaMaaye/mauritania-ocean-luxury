@@ -1,0 +1,1 @@
+import{i as e}from"./index-D5zNt5wf.js";var t=e();function n({parts:e,boldClassName:n}){return(0,t.jsx)(t.Fragment,{children:e.map((e,r)=>e.bold?(0,t.jsx)(`strong`,{className:n??`font-semibold`,children:e.text},r):e.italic?(0,t.jsx)(`em`,{children:e.text},r):(0,t.jsx)(`span`,{children:e.text},r))})}export{n as t};
